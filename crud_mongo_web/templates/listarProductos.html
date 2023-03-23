@@ -1,0 +1,53 @@
+{%extends "index.html"%}
+{%block encabezado%}
+    {%include "encabezado.html"%}
+{%endblock%}
+{%block contenido%}
+    <div>
+        <div class="d-flex justify-content-center" style="padding: 10px;">
+            <a href="/vistaAgregarProducto">
+                <button class="btn btn-success">Agregar</button>
+            </a>
+        </div>
+        <br>
+        <div class="table-responsive" style=" height: 300px; overflow: auto;">
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr class="text-center">
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Categoria</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for producto in listaProducto%}
+                        <tr>
+                            <td>{{producto['codigo']}}</td>
+                            <td>{{producto['nombre']}}</td>
+                            <td>{{producto['precio']}}</td>
+                            <td>{{producto['categoria']}}</td>
+                            <td class="text-center">
+                                <a href="/consultar/{{producto['codigo']}}">
+                                    <i class="fa fa-edit text-warning"></i>
+                                </a>
+                                <a href="/eliminar/{{producto['codigo']}}">
+                                    <i class="fa fa-trash text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        {%if mensaje%}
+            <script>
+                swal.fire("Gestion producto",'{{mensaje}}',"info");
+            </script>
+        {%endif%}
+    </div>
+{%endblock%}
+{%block piePagina%}
+    {%include "piePagina.html"%}
+{%endblock%}

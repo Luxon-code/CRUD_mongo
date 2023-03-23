@@ -1,0 +1,62 @@
+{%extends "index.html"%}
+{%block encabezado%}
+    {%include "encabezado.html"%}
+{%endblock%}
+{%block contenido%}
+    <div>
+        <form action="/agregarProducto" method="post" enctype="multipart/form-data" class="was-validated">
+            <div class="bg-info">
+                <h3 class="text-center">Gestion Productos</h3>
+            </div>
+            <div class="mb-3">
+                <label for="txtCodigo" class="fw-bold">Codigo:</label>
+                <input type="number" name="txtCodigo" id="txtCodigo" class="form-control" value="{{producto['codigo']}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="txtNombre" class="fw-bold">Nombre:</label>
+                <input type="text" name="txtNombre" id="txtNombre" class="form-control" value="{{producto['nombre']}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="txtPrecio"class="fw-bold">Precio:</label>
+                <input type="number" name="txtPrecio" id="txtPrecio" class="form-control" value="{{producto['precio']}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="txtPrecio"class="fw-bold">Categoria:</label>
+                <select name="cbCategoria" id="cbCategoria" class="form-select">
+                    {%if producto['categoria']==""%}
+                        <option value="">Seleccione</option>
+                        <option value="Electrodomestico">Electrodomestico</option>
+                        <option value="Ropa">Ropa</option>
+                        <option value="Calzado">Calzado</option>
+                    {%endif%}
+                    {%if producto['categoria']=="Electrodomestico"%}
+                        <option value="Electrodomestico">Electrodomestico</option>
+                        <option value="Ropa">Ropa</option>
+                        <option value="Calzado">Calzado</option>
+                    {%endif%}
+                    {%if producto['categoria']=="Ropa"%}
+                        <option value="Ropa">Ropa</option>
+                        <option value="Electrodomestico">Electrodomestico</option>
+                        <option value="Calzado">Calzado</option>
+                    {%endif%}
+                    {%if producto['categoria']=="Calzado"%}
+                        <option value="Calzado">Calzado</option>
+                        <option value="Electrodomestico">Electrodomestico</option>
+                        <option value="Ropa">Ropa</option>
+                    {%endif%}
+                </select>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Agregar</button>
+            </div>
+        </form>
+        {%if mensaje%}
+            <script>
+                swal.fire("Agregar producto",'{{mensaje}}',"info");
+            </script>
+        {%endif%}
+    </div>
+{%endblock%}
+{%block piePagina%}
+    {%include "piePagina.html"%}
+{%endblock%}
